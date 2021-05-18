@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.flowsample.databinding.ActivityMainBinding
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -28,9 +29,9 @@ class MainActivity : AppCompatActivity() {
         // This coroutine is tied to the lifecycle of this activity
         // If this activity is destroyed, the scope is automatically cancelled
         lifecycleScope.launch {
-            val networkFlow = networkListener.subscribeToNetworkFlow()
+            val networkFlow: Flow<Int> = networkListener.subscribeToNetworkFlow()
 
-            networkFlow.collect { number ->
+            networkFlow.collect { number: Int ->
                 binding.message.text = "Your network was disconnected $number times"
             }
         }

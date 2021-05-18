@@ -21,6 +21,7 @@ class NetworkListener(context: Context) {
     fun subscribeToNetworkFlow(): Flow<Int> = callbackFlow {
         var networkDisconnectedCounter = 0
 
+        // Standard callback in listening to network change events
         val networkEvents = object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
                 super.onAvailable(network)
@@ -53,7 +54,7 @@ class NetworkListener(context: Context) {
 
 
     /**
-     *  Utility functions to ensure network connectivity
+     *  Utility function to ensure network connectivity
      *
      * @return true if network is connected. Otherwise, false
      */
